@@ -1,0 +1,210 @@
+
+PS C:\Users\Disha Singh\Desktop\DBMS-JOURNEY> mysql -u root -p
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| universitydb       |
++--------------------+
+5 rows in set (0.17 sec)
+
+mysql> CREATE DATABASE COLLEGE;
+Query OK, 1 row affected (0.11 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| college            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| universitydb       |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> USE COLLEGE;
+Database changed
+mysql> CREATE TABLE COURSE;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> CREATE TABLE COURSE()
+    ->
+    -> EXIT
+    -> ^C
+mysql> CREATE TABLE COURSE(
+    -> COURSE_ID INT PRIMARY KEY,
+    -> COURSE_NAME VARCHAR(50),
+    -> CREDIT INT
+    -> );
+Query OK, 0 rows affected (0.63 sec)
+
+mysql> INSERT INTO COURSE VALUES
+    -> (1,'BTECH CSE',4),
+    -> (2,'BTECH ECE',4),
+    -> (3,'BTECH ME',3),
+    -> (4,'BTECH AI',4);
+Query OK, 4 rows affected (0.24 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_college |
++-------------------+
+| course            |
++-------------------+
+1 row in set (0.09 sec)
+
+mysql> DESC COURSE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| COURSE_ID   | int         | NO   | PRI | NULL    |       |
+| COURSE_NAME | varchar(50) | YES  |     | NULL    |       |
+| CREDIT      | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.17 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| college            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| universitydb       |
++--------------------+
+6 rows in set (0.01 sec)
+
+mysql> USE COLLEGE;
+Database changed
+mysql> CREATE TABLE STUDENT(
+    -> ROLL_NO INT PRIMARY KEY,
+    -> NAME VARCHAR(50) NOT NULL,
+    -> AGE INT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+mysql> CREATE TABLE STUDENT(
+    -> ROLL_NO INT PRIMARY KEY,
+    ->  NAME VARCHAR(50) NOT NULL,
+    -> AGE INT,
+    -> EMAIL VARCHAR(100) UNIQUE,
+    -> BRANCH VARCHAR(30) DEFAULT 'CSE',
+    -> COURSE_ID INT FOREIGN KEY,
+    -> MARKS INT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FOREIGN KEY,
+MARKS INT' at line 7
+mysql>  CREATE TABLE STUDENT(
+    ->     -> ROLL_NO INT PRIMARY KEY,
+    ->     ->  NAME VARCHAR(50) NOT NULL,
+    ->     -> AGE INT,
+    ->     -> EMAIL VARCHAR(100) UNIQUE,
+    ->     -> BRANCH VARCHAR(30) DEFAULT 'CSE',
+    ->     -> COURSE_ID INT FOREIGN KEY,
+    ->     -> MARKS INT);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> ROLL_NO INT PRIMARY KEY,
+    ->  NAME VARCHAR(50) NOT NULL,
+    -> AGE INT,
+ ' at line 2
+mysql> CREATE TABLE STUDENT(
+    ->     ->     -> ROLL_NO INT PRIMARY KEY,
+    ->     ->     ->  NAME VARCHAR(50) NOT NULL,
+    ->     ->     -> AGE INT,
+    ->     ->     -> EMAIL VARCHAR(100) UNIQUE,
+    ->     ->     -> BRANCH VARCHAR(30) DEFAULT 'CSE',
+    -> ^C
+mysql> CREATE TABLE STUDENT (
+    ->     ROLL_NO INT PRIMARY KEY,
+    ->     NAME VARCHAR(50) NOT NULL,
+    ->     AGE INT,
+    ->     EMAIL VARCHAR(100) UNIQUE,
+    ->     BRANCH VARCHAR(30) DEFAULT 'CSE',
+    ->     COURSE_ID INT FOREIGN KEY,
+    ->     MARKS INT
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FOREIGN KEY,
+    MARKS INT
+)' at line 7
+mysql> CREATE TABLE STUDENT (
+    ->     ROLL_NO INT PRIMARY KEY,
+    ->     NAME VARCHAR(50) NOT NULL,
+    ->     AGE INT,
+    ->     EMAIL VARCHAR(100) UNIQUE,
+    ->     BRANCH VARCHAR(30) DEFAULT 'CSE',
+    ->     COURSE_ID INT,
+    ->     MARKS INT
+    -> );
+Query OK, 0 rows affected (0.22 sec)
+
+mysql> INSERT INTO STUDENT (ROLL_NO, NAME, AGE, EMAIL, BRANCH, COURSE_ID, MARKS)
+    -> VALUES
+    -> (101, 'Rahul Sharma', 19, 'rahul@gmail.com', 'CSE', 201, 85),
+    -> (102, 'Priya Singh', 20, 'priya@gmail.com', 'ECE', 202, 91),
+    -> (103, 'Aman Verma', 19, 'aman@gmail.com', 'CSE', 201, 78),
+    -> (104, 'Neha Gupta', 21, 'neha@gmail.com', 'IT', 203, 88),
+    -> (105, 'Arjun Kumar', 20, 'ME', 204, 74),
+    -> (106, 'Simran Kaur', 19, 'CSE', 201, 95),
+    -> (107, 'Rohan Mehta', 21, 'ECE', 202, 82),
+    -> (108, 'Anjali Yadav', 20, 'anjali@gmail.com', 'IT', 203, 89);
+ERROR 1136 (21S01): Column count doesn't match value count at row 5
+mysql> INSERT INTO STUDENT (ROLL_NO, NAME, AGE, EMAIL, BRANCH, COURSE_ID, MARKS)
+    -> VALUES
+    -> (101, 'Rahul Sharma', 19, 'rahul@gmail.com', 'CSE', 201, 85),
+    -> (102, 'Priya Singh', 20, 'priya@gmail.com', 'ECE', 202, 91),
+    -> (103, 'Aman Verma', 19, 'aman@gmail.com', 'CSE', 201, 78),
+    -> (104, 'Neha Gupta', 21, 'neha@gmail.com', 'IT', 203, 88),
+    -> (105, 'Arjun Kumar', 20, 'arjun@gmail.com', 'ME', 204, 74),
+    -> (106, 'Simran Kaur', 19, 'simran@gmail.com', 'CSE', 201, 95),
+    -> (107, 'Rohan Mehta', 21, 'rohan@gmail.com', 'ECE', 202, 82),
+    -> (108, 'Anjali Yadav', 20, 'anjali@gmail.com', 'IT', 203, 89);
+Query OK, 8 rows affected (0.03 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| ROLL_NO   | int          | NO   | PRI | NULL    |       |
+| NAME      | varchar(50)  | NO   |     | NULL    |       |
+| AGE       | int          | YES  |     | NULL    |       |
+| EMAIL     | varchar(100) | YES  | UNI | NULL    |       |
+| BRANCH    | varchar(30)  | YES  |     | CSE     |       |
+| COURSE_ID | int          | YES  |     | NULL    |       |
+| MARKS     | int          | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.07 sec)
+
+mysql> SELECT * FROM STUDENT;
++---------+--------------+------+------------------+--------+-----------+-------+
+| ROLL_NO | NAME         | AGE  | EMAIL            | BRANCH | COURSE_ID | MARKS |
++---------+--------------+------+------------------+--------+-----------+-------+
+|     101 | Rahul Sharma |   19 | rahul@gmail.com  | CSE    |       201 |    85 |
+|     102 | Priya Singh  |   20 | priya@gmail.com  | ECE    |       202 |    91 |
+|     103 | Aman Verma   |   19 | aman@gmail.com   | CSE    |       201 |    78 |
+|     104 | Neha Gupta   |   21 | neha@gmail.com   | IT     |       203 |    88 |
+|     105 | Arjun Kumar  |   20 | arjun@gmail.com  | ME     |       204 |    74 |
+|     106 | Simran Kaur  |   19 | simran@gmail.com | CSE    |       201 |    95 |
+|     107 | Rohan Mehta  |   21 | rohan@gmail.com  | ECE    |       202 |    82 |
+|     108 | Anjali Yadav |   20 | anjali@gmail.com | IT     |       203 |    89 |
++---------+--------------+------+------------------+--------+-----------+-------+
+8 rows in set (0.01 sec)
+
+mysql>
