@@ -1,4 +1,3 @@
-
 PS C:\Users\Disha Singh\Desktop\DBMS-JOURNEY> mysql -u root -p
 Enter password: *****
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -45,8 +44,8 @@ mysql> USE COLLEGE;
 Database changed
 mysql> CREATE TABLE COURSE;
 ERROR 4028 (HY000): A table must have at least one visible column.
-mysql> CREATE TABLE COURSE()
-    ->
+mysql> CREATE TABLE COURSE()  
+    -> 
     -> EXIT
     -> ^C
 mysql> CREATE TABLE COURSE(
@@ -56,7 +55,7 @@ mysql> CREATE TABLE COURSE(
     -> );
 Query OK, 0 rows affected (0.63 sec)
 
-mysql> INSERT INTO COURSE VALUES
+mysql> INSERT INTO COURSE VALUES 
     -> (1,'BTECH CSE',4),
     -> (2,'BTECH ECE',4),
     -> (3,'BTECH ME',3),
@@ -102,7 +101,7 @@ mysql> CREATE TABLE STUDENT(
     -> NAME VARCHAR(50) NOT NULL,
     -> AGE INT;
 ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
-mysql> CREATE TABLE STUDENT(
+mysql> CREATE TABLE STUDENT(     
     -> ROLL_NO INT PRIMARY KEY,
     ->  NAME VARCHAR(50) NOT NULL,
     -> AGE INT,
@@ -112,7 +111,7 @@ mysql> CREATE TABLE STUDENT(
     -> MARKS INT;
 ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FOREIGN KEY,
 MARKS INT' at line 7
-mysql>  CREATE TABLE STUDENT(
+mysql>  CREATE TABLE STUDENT(     
     ->     -> ROLL_NO INT PRIMARY KEY,
     ->     ->  NAME VARCHAR(50) NOT NULL,
     ->     -> AGE INT,
@@ -124,13 +123,13 @@ ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that 
     ->  NAME VARCHAR(50) NOT NULL,
     -> AGE INT,
  ' at line 2
-mysql> CREATE TABLE STUDENT(
+mysql> CREATE TABLE STUDENT(     
     ->     ->     -> ROLL_NO INT PRIMARY KEY,
     ->     ->     ->  NAME VARCHAR(50) NOT NULL,
     ->     ->     -> AGE INT,
     ->     ->     -> EMAIL VARCHAR(100) UNIQUE,
     ->     ->     -> BRANCH VARCHAR(30) DEFAULT 'CSE',
-    -> ^C
+    -> ^C                                                 
 mysql> CREATE TABLE STUDENT (
     ->     ROLL_NO INT PRIMARY KEY,
     ->     NAME VARCHAR(50) NOT NULL,
@@ -207,4 +206,133 @@ mysql> SELECT * FROM STUDENT;
 +---------+--------------+------+------------------+--------+-----------+-------+
 8 rows in set (0.01 sec)
 
-mysql>
+mysql> ALTER TABLE STUDENT ADD SEMESTER INT;
+Query OK, 0 rows affected (0.26 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC COURSE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| COURSE_ID   | int         | NO   | PRI | NULL    |       |
+| COURSE_NAME | varchar(50) | YES  |     | NULL    |       |
+| CREDIT      | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> DESC STUDENT;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| ROLL_NO   | int          | NO   | PRI | NULL    |       |
+| NAME      | varchar(50)  | NO   |     | NULL    |       |
+| AGE       | int          | YES  |     | NULL    |       |
+| EMAIL     | varchar(100) | YES  | UNI | NULL    |       |
+| BRANCH    | varchar(30)  | YES  |     | CSE     |       |
+| COURSE_ID | int          | YES  |     | NULL    |       |
+| MARKS     | int          | YES  |     | NULL    |       |
+| SEMESTER  | int          | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> SHOW*FROM STUDENT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*FROM STUDENT' at line 1
+mysql> SHOW * FROM STUDENT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* FROM STUDENT' at line 1
+mysql> SELECT * FROM STUDENT;               
++---------+--------------+------+------------------+--------+-----------+-------+----------+
+| ROLL_NO | NAME         | AGE  | EMAIL            | BRANCH | COURSE_ID | MARKS | SEMESTER |
++---------+--------------+------+------------------+--------+-----------+-------+----------+
+|     101 | Rahul Sharma |   19 | rahul@gmail.com  | CSE    |       201 |    85 |     NULL |
+|     102 | Priya Singh  |   20 | priya@gmail.com  | ECE    |       202 |    91 |     NULL |
+|     103 | Aman Verma   |   19 | aman@gmail.com   | CSE    |       201 |    78 |     NULL |
+|     104 | Neha Gupta   |   21 | neha@gmail.com   | IT     |       203 |    88 |     NULL |
+|     105 | Arjun Kumar  |   20 | arjun@gmail.com  | ME     |       204 |    74 |     NULL |
+|     106 | Simran Kaur  |   19 | simran@gmail.com | CSE    |       201 |    95 |     NULL |
+|     107 | Rohan Mehta  |   21 | rohan@gmail.com  | ECE    |       202 |    82 |     NULL |
+|     108 | Anjali Yadav |   20 | anjali@gmail.com | IT     |       203 |    89 |     NULL |
++---------+--------------+------+------------------+--------+-----------+-------+----------+
+8 rows in set (0.00 sec)
+
+mysql> UPDATE STUDENT
+    -> SET MARKS = 90
+    -> WHERE ROLL_NO = 101;
+Query OK, 1 row affected (0.15 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> 
+mysql> UPDATE STUDENT
+    -> SET MARKS = 95
+    -> WHERE ROLL_NO = 102;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT *FROM STUDENT;
++---------+--------------+------+------------------+--------+-----------+-------+----------+
+| ROLL_NO | NAME         | AGE  | EMAIL            | BRANCH | COURSE_ID | MARKS | SEMESTER |
++---------+--------------+------+------------------+--------+-----------+-------+----------+
+|     101 | Rahul Sharma |   19 | rahul@gmail.com  | CSE    |       201 |    90 |     NULL |
+|     102 | Priya Singh  |   20 | priya@gmail.com  | ECE    |       202 |    95 |     NULL |
+|     103 | Aman Verma   |   19 | aman@gmail.com   | CSE    |       201 |    78 |     NULL |
+|     104 | Neha Gupta   |   21 | neha@gmail.com   | IT     |       203 |    88 |     NULL |
+|     105 | Arjun Kumar  |   20 | arjun@gmail.com  | ME     |       204 |    74 |     NULL |
+|     106 | Simran Kaur  |   19 | simran@gmail.com | CSE    |       201 |    95 |     NULL |
+|     107 | Rohan Mehta  |   21 | rohan@gmail.com  | ECE    |       202 |    82 |     NULL |
+|     108 | Anjali Yadav |   20 | anjali@gmail.com | IT     |       203 |    89 |     NULL |
++---------+--------------+------+------------------+--------+-----------+-------+----------+
+8 rows in set (0.03 sec)
+
+mysql> UPDATE STUDENT
+    -> SET SEMESTER = 2;
+Query OK, 8 rows affected (0.01 sec)
+Rows matched: 8  Changed: 8  Warnings: 0
+
+mysql> SELECT *FROM STUDENT;
++---------+--------------+------+------------------+--------+-----------+-------+----------+
+| ROLL_NO | NAME         | AGE  | EMAIL            | BRANCH | COURSE_ID | MARKS | SEMESTER |
++---------+--------------+------+------------------+--------+-----------+-------+----------+
+|     101 | Rahul Sharma |   19 | rahul@gmail.com  | CSE    |       201 |    90 |        2 |
+|     102 | Priya Singh  |   20 | priya@gmail.com  | ECE    |       202 |    95 |        2 |
+|     103 | Aman Verma   |   19 | aman@gmail.com   | CSE    |       201 |    78 |        2 |
+|     104 | Neha Gupta   |   21 | neha@gmail.com   | IT     |       203 |    88 |        2 |
+|     105 | Arjun Kumar  |   20 | arjun@gmail.com  | ME     |       204 |    74 |        2 |
+|     106 | Simran Kaur  |   19 | simran@gmail.com | CSE    |       201 |    95 |        2 |
+|     107 | Rohan Mehta  |   21 | rohan@gmail.com  | ECE    |       202 |    82 |        2 |
+|     108 | Anjali Yadav |   20 | anjali@gmail.com | IT     |       203 |    89 |        2 |
++---------+--------------+------+------------------+--------+-----------+-------+----------+
+8 rows in set (0.00 sec)
+
+mysql> DELETE FROM STUDENT
+    -> WHERE ROLL_NO = 107;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT *FROM STUDENT;
++---------+--------------+------+------------------+--------+-----------+-------+----------+
+| ROLL_NO | NAME         | AGE  | EMAIL            | BRANCH | COURSE_ID | MARKS | SEMESTER |
++---------+--------------+------+------------------+--------+-----------+-------+----------+
+|     101 | Rahul Sharma |   19 | rahul@gmail.com  | CSE    |       201 |    90 |        2 |
+|     102 | Priya Singh  |   20 | priya@gmail.com  | ECE    |       202 |    95 |        2 |
+|     103 | Aman Verma   |   19 | aman@gmail.com   | CSE    |       201 |    78 |        2 |
+|     104 | Neha Gupta   |   21 | neha@gmail.com   | IT     |       203 |    88 |        2 |
+|     105 | Arjun Kumar  |   20 | arjun@gmail.com  | ME     |       204 |    74 |        2 |
+|     106 | Simran Kaur  |   19 | simran@gmail.com | CSE    |       201 |    95 |        2 |
+|     108 | Anjali Yadav |   20 | anjali@gmail.com | IT     |       203 |    89 |        2 |
++---------+--------------+------+------------------+--------+-----------+-------+----------+
+7 rows in set (0.00 sec)
+
+mysql> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
