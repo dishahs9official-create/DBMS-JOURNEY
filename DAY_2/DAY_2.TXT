@@ -1,0 +1,59 @@
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| college            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| universitydb       |
++--------------------+
+6 rows in set (0.34 sec)
+
+mysql> SHOW UNIVERSITYDB;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UNIVERSITYDB' at line 1
+mysql> USE UNIVERSITYDB;
+Database changed
+mysql> SHOW TABLES;
++------------------------+
+| Tables_in_universitydb |
++------------------------+
+| students               |
+| systemlog              |
++------------------------+
+2 rows in set (0.34 sec)
+
+mysql> DESC STUDENTS;
++----------------+--------------+------+-----+-------------------+-------------------+
+| Field          | Type         | Null | Key | Default           | Extra             |
++----------------+--------------+------+-----+-------------------+-------------------+
+| StudentID      | int          | NO   | PRI | NULL              | auto_increment    |
+| FirstName      | varchar(50)  | NO   |     | NULL              |                   |
+| LastName       | varchar(50)  | NO   |     | NULL              |                   |
+| DateOfBirth    | date         | YES  |     | NULL              |                   |
+| Email          | varchar(100) | YES  | UNI | NULL              |                   |
+| GPA            | decimal(4,2) | YES  |     | 0.00              |                   |
+| EnrollmentDate | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
++----------------+--------------+------+-----+-------------------+-------------------+
+7 rows in set (0.04 sec)
+
+mysql> DROP DATABASE UNIVERSITYDB;
+Query OK, 2 rows affected (0.55 sec)
+
+mysql> DROP DATABASE COLLEGE;
+Query OK, 2 rows affected (0.05 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.01 sec)
+
+mysql> 
